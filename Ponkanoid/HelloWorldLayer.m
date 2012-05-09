@@ -9,6 +9,12 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "CCTouchDispatcher.h"
+
+
+CCSprite *block1;
+CCSprite *block2;
+
 
 // HelloWorldLayer implementation
 @implementation HelloWorldLayer
@@ -28,24 +34,52 @@
 	return scene;
 }
 
+
+-(void) nextFrame:(ccTime)dt {
+    block1.position = ccp(block1.position.x + 200*dt, block1.position.y);
+    if (block1.position.x > 1024+35) {
+        block1.position = ccp( 35, block1.position.y);
+    }
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    return YES;
+}
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+	 
+    CGPoint location = [self convertTouchToNodeSpace: touch];
+	[block2 stopAllActions];
+	[block2 runAction: [CCMoveTo actionWithDuration:1 position:location]];    
+    
+}
+
+
+
+-(void) registerWithTouchDispatcher
+{
+	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+}
+
+
 // on "init" you need to initialize your instance
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+		block1 = [CCSprite spriteWithFile:@"block1.png"];
+        block1.position = ccp(50, 100);
+        [self addChild:block1];
 
-		// ask director the the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		[self addChild: label];
+		block2 = [CCSprite spriteWithFile:@"paddle.png"];
+        block2.position = ccp(100, 200);
+        [self addChild:block2];   
+        
+        [self schedule:@selector(nextFrame:)];
+        
+        self.isTouchEnabled = YES;
+        
 	}
 	return self;
 }
