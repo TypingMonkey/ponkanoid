@@ -13,10 +13,12 @@
     
 }
 
+
 @property (nonatomic, readwrite) int player;
 @property (nonatomic, readwrite) float velocity;
 @property (nonatomic, readwrite) float targetY; // paddle should move here after touch
 
+extern int const marginY;
 
 - (id) initForPlayer:(int)playerNo;
 -(void)move:(ccTime)delta;

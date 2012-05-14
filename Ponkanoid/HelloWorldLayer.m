@@ -12,9 +12,9 @@
 #import "CCTouchDispatcher.h"
 #import "Paddle.h"
 #import "Ball.h"
+#import "Block.h"
 
 
-CCSprite *block1;
 Paddle *paddle1;
 Paddle *paddle2;
 Ball *ball;
@@ -41,14 +41,24 @@ Ball *ball;
 
 
 -(void) nextFrame:(ccTime)dt {
-
-    [ball move:dt];
     
     [paddle1 move:dt];
     [paddle2 move:dt];
     
-    [ball collideWithPaddle:paddle1];
-    [ball collideWithPaddle:paddle2];
+    
+    // Code below iterates through all Balls, and for each Ball node through all Block nodes in order to
+    // handle collisions
+    for (Ball * currentBall in [self children])  if ([currentBall isKindOfClass:[Ball class]]) {
+        // iterate through all Ball nodes        
+        [currentBall move:dt];                        
+
+        for (CCNode * node in [self children]) if ([node isKindOfClass:[Block class]]) { 
+              // iterate through all Block nodes
+                if ([currentBall collideWithBlock:(Block*)node]) [self removeChild:node cleanup:YES]; // cleanup when collision occurs
+            } // end of Block iteration                       
+        [currentBall collideWithPaddle:paddle1];
+        [currentBall collideWithPaddle:paddle2];
+    } // end of Ball iteration
     
 }
 
@@ -73,11 +83,9 @@ Ball *ball;
     if (location.x < 60) { // Player 1
         //paddle1.position = ccp(50, location.y);  
         paddle1.targetY = location.y;
-        NSLog(@"%i ", paddle1.targetY);
     } else if (location.x > 964) { // Player 2
         //paddle2.position = ccp(974, location.y);        
         paddle2.targetY = location.y;    
-        NSLog(@"%i ", paddle2.targetY);
     }
 }
 
@@ -94,9 +102,6 @@ Ball *ball;
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-		block1 = [CCSprite spriteWithFile:@"block1.png"];
-        block1.position = ccp(50, 100);
-        [self addChild:block1];
 
 		paddle1 = [[Paddle alloc] initForPlayer:1];            
         [self addChild:paddle1];   
@@ -104,9 +109,20 @@ Ball *ball;
 		paddle2 = [[Paddle alloc] initForPlayer:2];            
         [self addChild:paddle2];           
         
-        ball = [[Ball alloc] initWithLocation:ccp(500,500) andVelocity:ccp(300,100)];
+        ball = [[Ball alloc] initWithLocation:ccp(100,500) andVelocity:ccp(300,100)]; // P1 ball
         [self addChild:ball];
         
+        ball = [[Ball alloc] initWithLocation:ccp(900,500) andVelocity:ccp(-300,-100)]; // P2 ball
+        [self addChild:ball];
+
+        
+        // Create blocks
+        for (int row = 0; row <= 8; row++) {          
+            for (int index = 0; index <= 9; index++) {
+                Block *block = [[Block alloc] initWithRow:row atIndex:index];
+                [self addChild:block];
+            }
+        }   
         [self schedule:@selector(nextFrame:)];
         
         self.isTouchEnabled = YES;

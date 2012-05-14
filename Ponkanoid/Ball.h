@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Paddle.h"
+#import "Block.h"
 
 @interface Ball : CCSprite {
     
@@ -20,6 +21,7 @@
 -(float)radius;
 -(void)move:(ccTime)delta;
 -(BOOL)collideWithPaddle:(Paddle*)paddle;
+-(BOOL)collideWithBlock:(Block*)block;
 
 
 @end

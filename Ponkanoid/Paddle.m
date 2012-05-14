@@ -17,7 +17,9 @@
 
 int const player1X = 50;
 int const player2X = 974;
-int const paddleVelocity = 600;
+int const paddleVelocity = 1000;
+
+int const marginY = 8; // screen margin on both sides (in order to be able to draw 10 blocks of 76 pix height each
 
 
 - (id) initForPlayer:(int)playerNo {
@@ -40,10 +42,10 @@ int const paddleVelocity = 600;
     CGPoint newLocation; // Will be used to check if paddle won't be placed beyond targetY, considering paddle speed  
     
     // Make sure paddle stays within screen boundaries
-    if (targetY > 768 - ([self boundingBox].size.height / 2)) 
-        targetY = 768 - ([self boundingBox].size.height / 2);
-    if (targetY < ([self boundingBox].size.height / 2)) 
-        targetY = ([self boundingBox].size.height / 2);   
+    if (targetY > 768 - marginY - ([self boundingBox].size.height / 2)) 
+        targetY = 768 - marginY - ([self boundingBox].size.height / 2);
+    if (targetY < ([self boundingBox].size.height / 2) + marginY) 
+        targetY = ([self boundingBox].size.height / 2) + marginY;   
     // Move paddle down
     if (targetY > self.position.y) {
         newLocation = ccpAdd(self.position, ccpMult(ccp(0, paddleVelocity), delta));

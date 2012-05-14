@@ -125,6 +125,7 @@
 		0A243D16155AF8930003E8AB /* block1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A243D15155AF8930003E8AB /* block1.png */; };
 		0A243D18155AF8FE0003E8AB /* block2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A243D17155AF8FE0003E8AB /* block2.png */; };
 		0A243D20155B09250003E8AB /* paddle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A243D1F155B09250003E8AB /* paddle.png */; };
+		0A58D08F1561672B006356AB /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58D08E1561672B006356AB /* Block.m */; };
 		0A79A240155E974A0068429F /* Paddle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A79A23F155E974A0068429F /* Paddle.m */; };
 		0A79A44D155EB5DE0068429F /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A79A44C155EB5DD0068429F /* Ball.m */; };
 		0A79A450155EB94C0068429F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A79A44F155EB94C0068429F /* ball.png */; };
@@ -369,6 +370,8 @@
 		0A243D15155AF8930003E8AB /* block1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block1.png; sourceTree = "<group>"; };
 		0A243D17155AF8FE0003E8AB /* block2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block2.png; sourceTree = "<group>"; };
 		0A243D1F155B09250003E8AB /* paddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paddle.png; sourceTree = "<group>"; };
+		0A58D08D1561672B006356AB /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		0A58D08E1561672B006356AB /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
 		0A79A23E155E974A0068429F /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
 		0A79A23F155E974A0068429F /* Paddle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Paddle.m; sourceTree = "<group>"; };
 		0A79A44B155EB5DD0068429F /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
@@ -790,6 +793,8 @@
 			children = (
 				0A79A44B155EB5DD0068429F /* Ball.h */,
 				0A79A44C155EB5DD0068429F /* Ball.m */,
+				0A58D08D1561672B006356AB /* Block.h */,
+				0A58D08E1561672B006356AB /* Block.m */,
 				0A79A23E155E974A0068429F /* Paddle.h */,
 				0A79A23F155E974A0068429F /* Paddle.m */,
 			);
@@ -969,6 +974,7 @@
 				0A0618F51545FD6D0030915F /* HelloWorldLayer.m in Sources */,
 				0A79A240155E974A0068429F /* Paddle.m in Sources */,
 				0A79A44D155EB5DE0068429F /* Ball.m in Sources */,
+				0A58D08F1561672B006356AB /* Block.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

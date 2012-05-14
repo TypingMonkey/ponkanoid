@@ -7,11 +7,14 @@
 //
 
 #import "Ball.h"
+#import "Paddle.h"
+
 
 
 @implementation Ball
 
 @synthesize velocity;
+
 
 -(id)initWithLocation:(CGPoint)location andVelocity:(CGPoint)_velocity {
     if (self = [super initWithFile:@"ball.png"])
@@ -29,7 +32,7 @@
 -(void)move:(ccTime)delta {
     self.position = ccpAdd(self.position, ccpMult(velocity, delta));
     
-    if (self.position.y < self.radius || self.position.y > 768-self.radius)
+    if (self.position.y < self.radius + marginY || self.position.y > 768-self.radius-marginY)
         velocity.y *= -1;
     
     if (self.position.x <self.radius)//player 1 score
@@ -43,6 +46,13 @@
 -(BOOL)collideWithPaddle:(Paddle*)paddle {
     return [self collideWithRect:paddle ];
 }
+
+-(BOOL)collideWithBlock:(Block*)block {
+    BOOL result = [self collideWithRect:block];
+    if (result) [block destroy]; // block should destroy itself
+    return result;
+}
+
 
 -(BOOL) collideWithRect:(CCNode*)node {
     if (CGRectIntersectsRect([self boundingBox], [node boundingBox]))
@@ -58,7 +68,7 @@
         CGPoint reflect = ccpSub(selfOrigin, otherOrigin);
         reflect.x *= 5;//to make the ball allways have a decent speed beteen the pedals
         
-        reflect = ccpMult(ccpNormalize(reflect), ccpLength(self.velocity) * 1.05f);
+        reflect = ccpMult(ccpNormalize(reflect), ccpLength(self.velocity) * 1.02f);
         
         self.velocity = reflect;
 
