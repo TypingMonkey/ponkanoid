@@ -42,6 +42,8 @@
 {
 	// Init the window
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [window setMultipleTouchEnabled:YES];
+
 	
 	// Try to use CADisplayLink director
 	// if it fails (SDK < 3.1) use the default director
@@ -65,10 +67,14 @@
 								   pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
 								   depthFormat:0						// GL_DEPTH_COMPONENT16_OES
 						];
+
 	
 	// attach the openglView to the director
 	[director setOpenGLView:glView];
+
+    [glView setMultipleTouchEnabled:YES];
 	
+    
 //	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 //	if( ! [director enableRetinaDisplay:YES] )
 //		CCLOG(@"Retina Display Not supported");
@@ -97,7 +103,6 @@
 	
 	// make the View Controller a child of the main window
 	[window addSubview: viewController.view];
-	
 	[window makeKeyAndVisible];
 	
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images

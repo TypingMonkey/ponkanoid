@@ -10,10 +10,15 @@
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "CCTouchDispatcher.h"
+#import "Paddle.h"
+#import "Ball.h"
 
 
 CCSprite *block1;
-CCSprite *block2;
+Paddle *paddle1;
+Paddle *paddle2;
+Ball *ball;
+
 
 
 // HelloWorldLayer implementation
@@ -36,24 +41,45 @@ CCSprite *block2;
 
 
 -(void) nextFrame:(ccTime)dt {
-    block1.position = ccp(block1.position.x + 200*dt, block1.position.y);
-    if (block1.position.x > 1024+35) {
-        block1.position = ccp( 35, block1.position.y);
-    }
-}
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
-}
-
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-	 
-    CGPoint location = [self convertTouchToNodeSpace: touch];
-	[block2 stopAllActions];
-	[block2 runAction: [CCMoveTo actionWithDuration:1 position:location]];    
+    [ball move:dt];
+    
+    [paddle1 move:dt];
+    [paddle2 move:dt];
+    
+    [ball collideWithPaddle:paddle1];
+    [ball collideWithPaddle:paddle2];
     
 }
 
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    [self processTouch:touch];  
+    return YES;
+}
+
+ 
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    [self processTouch:touch];
+}
+     
+- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    [self processTouch:touch];    
+}
+
+
+- (void) processTouch:(UITouch *)touch {
+    CGPoint location = [self convertTouchToNodeSpace: touch];    
+    if (location.x < 60) { // Player 1
+        //paddle1.position = ccp(50, location.y);  
+        paddle1.targetY = location.y;
+        NSLog(@"%i ", paddle1.targetY);
+    } else if (location.x > 964) { // Player 2
+        //paddle2.position = ccp(974, location.y);        
+        paddle2.targetY = location.y;    
+        NSLog(@"%i ", paddle2.targetY);
+    }
+}
 
 
 -(void) registerWithTouchDispatcher
@@ -72,13 +98,20 @@ CCSprite *block2;
         block1.position = ccp(50, 100);
         [self addChild:block1];
 
-		block2 = [CCSprite spriteWithFile:@"paddle.png"];
-        block2.position = ccp(100, 200);
-        [self addChild:block2];   
+		paddle1 = [[Paddle alloc] initForPlayer:1];            
+        [self addChild:paddle1];   
+
+		paddle2 = [[Paddle alloc] initForPlayer:2];            
+        [self addChild:paddle2];           
+        
+        ball = [[Ball alloc] initWithLocation:ccp(500,500) andVelocity:ccp(300,100)];
+        [self addChild:ball];
         
         [self schedule:@selector(nextFrame:)];
         
         self.isTouchEnabled = YES;
+        
+
         
 	}
 	return self;

@@ -125,6 +125,9 @@
 		0A243D16155AF8930003E8AB /* block1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A243D15155AF8930003E8AB /* block1.png */; };
 		0A243D18155AF8FE0003E8AB /* block2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A243D17155AF8FE0003E8AB /* block2.png */; };
 		0A243D20155B09250003E8AB /* paddle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A243D1F155B09250003E8AB /* paddle.png */; };
+		0A79A240155E974A0068429F /* Paddle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A79A23F155E974A0068429F /* Paddle.m */; };
+		0A79A44D155EB5DE0068429F /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A79A44C155EB5DD0068429F /* Ball.m */; };
+		0A79A450155EB94C0068429F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A79A44F155EB94C0068429F /* ball.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -366,6 +369,11 @@
 		0A243D15155AF8930003E8AB /* block1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block1.png; sourceTree = "<group>"; };
 		0A243D17155AF8FE0003E8AB /* block2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block2.png; sourceTree = "<group>"; };
 		0A243D1F155B09250003E8AB /* paddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paddle.png; sourceTree = "<group>"; };
+		0A79A23E155E974A0068429F /* Paddle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paddle.h; sourceTree = "<group>"; };
+		0A79A23F155E974A0068429F /* Paddle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Paddle.m; sourceTree = "<group>"; };
+		0A79A44B155EB5DD0068429F /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
+		0A79A44C155EB5DD0068429F /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
+		0A79A44F155EB94C0068429F /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +430,7 @@
 		0A06179B1545FD690030915F /* Ponkanoid */ = {
 			isa = PBXGroup;
 			children = (
+				0A79A44E155EB5E70068429F /* Classes */,
 				0A0618ED1545FD6D0030915F /* AppDelegate.h */,
 				0A0618EE1545FD6D0030915F /* AppDelegate.m */,
 				0A0618F01545FD6D0030915F /* RootViewController.h */,
@@ -768,11 +777,23 @@
 		0A243D14155AF61A0003E8AB /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				0A79A44F155EB94C0068429F /* ball.png */,
 				0A243D1F155B09250003E8AB /* paddle.png */,
 				0A243D17155AF8FE0003E8AB /* block2.png */,
 				0A243D15155AF8930003E8AB /* block1.png */,
 			);
 			name = sprites;
+			sourceTree = "<group>";
+		};
+		0A79A44E155EB5E70068429F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0A79A44B155EB5DD0068429F /* Ball.h */,
+				0A79A44C155EB5DD0068429F /* Ball.m */,
+				0A79A23E155E974A0068429F /* Paddle.h */,
+				0A79A23F155E974A0068429F /* Paddle.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -837,6 +858,7 @@
 				0A243D16155AF8930003E8AB /* block1.png in Resources */,
 				0A243D18155AF8FE0003E8AB /* block2.png in Resources */,
 				0A243D20155B09250003E8AB /* paddle.png in Resources */,
+				0A79A450155EB94C0068429F /* ball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,6 +967,8 @@
 				0A0618EF1545FD6D0030915F /* AppDelegate.m in Sources */,
 				0A0618F21545FD6D0030915F /* RootViewController.m in Sources */,
 				0A0618F51545FD6D0030915F /* HelloWorldLayer.m in Sources */,
+				0A79A240155E974A0068429F /* Paddle.m in Sources */,
+				0A79A44D155EB5DE0068429F /* Ball.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
